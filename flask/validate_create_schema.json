@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "advertisement": {
+            "type": "object",
+            "properties": {
+                "title": {"type": "string"},
+                "description": {"type": "string"}
+            },
+            "required": ["title", "description"]
+        },
+
+        "user": {
+            "type": "object",
+            "properties": {
+                "login": {"type": "string"},
+                "email": {"type": "string"},
+                "phone": {"type": "string"}
+            },
+            "required": ["login"]
+        }
+    },
+    "required": ["advertisement"]
+}
