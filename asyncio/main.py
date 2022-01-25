@@ -8,7 +8,7 @@ import time
 con = sqlite3.connect('contacts.db')
 emails = [mail[0] for mail in con.execute("select email from contacts").fetchall()]
 
-EMAIL_SERVER_HOST = '89.108.79.53'
+EMAIL_SERVER_HOST = '127.0.0.1'
 PORT = 1025
 
 SUBJECT = 'TestMail'
@@ -30,12 +30,10 @@ async def send_mail(email):
 
 
 async def main():
-    tasks = [asyncio.ensure_future(send_mail(email)) for email in emails[:10]]
+    tasks = [asyncio.create_task(send_mail(email)) for email in emails]
     await asyncio.wait(tasks)
 
 
 start = time.time()
-event_loop = asyncio.get_event_loop()
-event_loop.run_until_complete(main())
-event_loop.close()
+event_loop = asyncio.run(main())
 print(time.time() - start)
